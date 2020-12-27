@@ -7,7 +7,7 @@ import { HttpException } from "../../exceptions/http/http-exception";
 export class CreateUserController {
 
     constructor (
-        private createUserUseCase: CreateUserUseCase,
+        private service: CreateUserUseCase,
     ) {
         this.handle = this.handle.bind(this);
     }
@@ -15,8 +15,8 @@ export class CreateUserController {
     async handle (req: Request, res: Response, next: NextFunction): Promise<Response> {
         const { name, email, birthday } = req.body;
         try {
-            const userCreated = await this.createUserUseCase.execute({ name, email, birthday });
-            return res.status(HttpStatusCode.CREATED).json(userCreated);
+            const response = await this.service.execute({ name, email, birthday });
+            return res.status(HttpStatusCode.CREATED).json(response);
         } catch(err) {
             let formattedError = err;
             if(err instanceof UserAlreadyExist) {

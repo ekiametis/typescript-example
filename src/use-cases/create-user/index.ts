@@ -3,7 +3,7 @@ import { MemoryUserRepository } from "../../repositories/user/memory-user-reposi
 import { CreateUserUseCase } from "./create-user-use-case";
 import { CreateUserController } from "./create-user-controller";
 
-const userRepository: IUserRepository = new MemoryUserRepository();
+const userRepository: IUserRepository = MemoryUserRepository.build();
 
 const createUserUseCase = new CreateUserUseCase(userRepository);
 

@@ -3,7 +3,17 @@ import { User } from "../../entities/user";
 
 export class MemoryUserRepository implements IUserRepository {
 
+    static instance: MemoryUserRepository;
     users: User[] = [];
+
+    private constructor () {}
+
+    static build() {
+        if(!this.instance) {
+            this.instance = new MemoryUserRepository()
+        }
+        return this.instance
+    }
     
     findByEmail(email: string): Promise<User> {
         return new Promise((resolve) => {
@@ -24,6 +34,12 @@ export class MemoryUserRepository implements IUserRepository {
             const userFound = this.users.find(u => u.id === id);
             resolve(userFound);
         });
+    }
+
+    findAll(): Promise<User[]> {
+        return new Promise((resolve) => {
+            resolve(this.users);
+        })
     }
 
 }
