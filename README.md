@@ -1,6 +1,6 @@
 It's a project I would like to show you the typescript code and my way to organize the project using DDD + SOLID + Package-by-feature + Clean Code + REST (Best practices)
 
-** This project is not fisished yet **
+**This project is not fisished yet**
 
 # 1. Structure
 

@@ -1,7 +1,7 @@
 {
   "name": "typescript-example",
   "version": "1.0.0",
-  "description": "It's a project I would like to show you the typescript coding and my way to organize the project using DDD + SOLID + Package-by-feature + Clean Code + REST (Best practices)",
+  "description": "It's a project I would like to show you the typescript code and my way to organize the project using DDD + SOLID + Package-by-feature + Clean Code + REST (Best practices)",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
