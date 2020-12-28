@@ -107,19 +107,25 @@ export class Log4JSLoggerConfigurator extends LoggerConfigurator {
         return this.instance;
     }
  
-    setup(): Log4JSLoggerConfigurator {
+    setup(): LoggerConfigurator {
         const loggerStore = this.getLoggerStore();
         const newLoggerStore = Log4JSBuilderConfigurator
             .start(loggerStore)
-            .addAppenders({ console: { type: 'console' }})
-            .addCategories({
-                system: {
-                    appenders: ['console'],
-                    level: 'debug',
-                    enableCallStack: true
-                }
+            .addAppenders({
+                default: { type: 'console' },
+                console: { type: 'console' },
             })
             .addCategories({
+                default: {
+                    appenders: ['default'],
+                    level: 'debug',
+                    enableCallStack: true
+                },
+                system: {
+                    appenders: ['console'],
+                    level: 'info',
+                    enableCallStack: true
+                },
                 systemError: {
                     appenders: ['console'],
                     level: 'error',
@@ -127,6 +133,7 @@ export class Log4JSLoggerConfigurator extends LoggerConfigurator {
                 }
             })
             .configure()
+            .addLogger('default')
             .addLogger('system')
             .addLogger('systemError')
             .finish();
