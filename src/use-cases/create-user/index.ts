@@ -5,8 +5,8 @@ import { CreateUserController } from "./create-user-controller";
 
 const userRepository: IUserRepository = MemoryUserRepository.build();
 
-const createUserUseCase = new CreateUserUseCase(userRepository);
+const createUserUseCase = CreateUserUseCase.build(userRepository);
 
-const createUserController: CreateUserController = new CreateUserController(createUserUseCase);
+const createUserController: CreateUserController = CreateUserController.build(createUserUseCase);
 
 export { createUserUseCase, createUserController }

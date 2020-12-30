@@ -3,13 +3,15 @@ import { IListUserRequestDTO, ListUserResponseDTO, IListUserResponseDTO } from "
 
 export class ListUsersUseCase {
 
-    constructor(
-        private userRepository: IUserRepository,
-    ) {}
+    private constructor(private userRepository: IUserRepository) {}
+
+    static build(userRepository: IUserRepository): ListUsersUseCase {
+        return new ListUsersUseCase(userRepository);
+    }
 
     async execute(data: IListUserRequestDTO): Promise<IListUserResponseDTO> {
         const users = await this.userRepository.findAll();
-        const response = new ListUserResponseDTO(users);
+        const response = ListUserResponseDTO.build(users);
         return response.listAll();
     }
 }

@@ -5,9 +5,11 @@ import { User } from "../../entities/user";
 
 export class CreateUserUseCase {
 
-    constructor(
-        private userRepository: IUserRepository,
-    ) {}
+    private constructor(private userRepository: IUserRepository) {}
+
+    static build(userRepository: IUserRepository): CreateUserUseCase {
+        return new CreateUserUseCase(userRepository);
+    }
 
     async execute(data: ICreateUserRequestDTO): Promise<ICreateUserResponseDTO> {
         const userAlreadyExists = await this.userRepository.findByEmail(data.email);

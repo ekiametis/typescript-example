@@ -5,8 +5,8 @@ import { ListUsersController } from "./list-users-controller";
 
 const userRepository: IUserRepository = MemoryUserRepository.build();
 
-const listUsersUseCase: ListUsersUseCase = new ListUsersUseCase(userRepository);
+const listUsersUseCase: ListUsersUseCase = ListUsersUseCase.build(userRepository);
 
-const listUsersController: ListUsersController = new ListUsersController(listUsersUseCase);
+const listUsersController: ListUsersController = ListUsersController.build(listUsersUseCase);
 
 export { listUsersUseCase, listUsersController }

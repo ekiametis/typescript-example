@@ -6,10 +6,12 @@ import { HttpException } from "../../exceptions/http/http-exception";
 
 export class CreateUserController {
 
-    constructor (
-        private service: CreateUserUseCase,
-    ) {
+    private constructor (private service: CreateUserUseCase) {
         this.handle = this.handle.bind(this);
+    }
+
+    static build(service: CreateUserUseCase): CreateUserController {
+        return new CreateUserController(service);
     }
 
     async handle (req: Request, res: Response, next: NextFunction): Promise<Response> {

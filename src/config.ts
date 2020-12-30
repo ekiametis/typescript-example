@@ -5,7 +5,10 @@ import { ILogger } from "./components/logger/logger";
 let loggerStore: LoggerStore;
 
 export const setup = (): void => {
-    loggerStore = Log4JSLoggerConfigurator.start().setup().getLoggerStore();
+    loggerStore = Log4JSLoggerConfigurator
+                    .build()
+                    .setup()
+                    .getLoggerStore();
 }
 
 export const getLoggerStore = (categoryName: string): ILogger => {

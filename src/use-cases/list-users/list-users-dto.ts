@@ -18,7 +18,11 @@ export interface IListUserResponseDTO {
 
 export class ListUserResponseDTO {
 
-    constructor(private users: UserDTO[] = []) {}
+    private constructor(private users: UserDTO[] = []) {}
+
+    static build(users: UserDTO[]): ListUserResponseDTO {
+        return new ListUserResponseDTO(users);
+    }
 
     push(user: UserDTO) {
         this.users.push(user);

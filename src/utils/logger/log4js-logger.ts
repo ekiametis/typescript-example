@@ -82,7 +82,7 @@ export class Log4JSLoggerStore extends LoggerStore {
         super(loggers);
     }
 
-    static start(): LoggerStore{
+    static build(): LoggerStore{
         if(!this.instance) {
             this.instance = new Log4JSLoggerStore();
         }
@@ -95,12 +95,12 @@ export class Log4JSLoggerConfigurator extends LoggerConfigurator {
     static instance: Log4JSLoggerConfigurator;
 
     private constructor(
-        loggerStore: Log4JSLoggerStore = Log4JSLoggerStore.start(),
+        loggerStore: Log4JSLoggerStore = Log4JSLoggerStore.build(),
     ) {
         super(loggerStore);
     }
     
-    static start(): Log4JSLoggerConfigurator{
+    static build(): Log4JSLoggerConfigurator{
         if(!this.instance) {
             this.instance = new Log4JSLoggerConfigurator();
         }
