@@ -47,6 +47,7 @@ export class MemoryUserRepository implements IUserRepository {
             let result = this.users;
             result = result.filter(u => {
                 return (
+                    Object.keys(query).length === 0 ||
                     query.id === u.id ||
                     query.name === u.name ||
                     query.email === u.email ||
@@ -62,6 +63,7 @@ export class MemoryUserRepository implements IUserRepository {
             let result = this.users;
             result = result.filter(u => {
                 return (
+                    Object.keys(query).length === 0 ||
                     query.id === u.id ||
                     query.name === u.name ||
                     query.email === u.email ||
