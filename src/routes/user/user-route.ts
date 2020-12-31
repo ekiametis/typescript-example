@@ -10,5 +10,6 @@ router.post('/users', createUserController.handle);
 router.get('/users', listUsersController.handle);
 router.get('/users/:id', retrieveUserController.handle);
 router.put('/users/:id', updateUserController.handle);
+router.patch('/users/:id', updateUserController.handle);
 
 export { router }

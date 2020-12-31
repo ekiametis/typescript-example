@@ -1,10 +1,10 @@
 import { expect } from 'chai';
-import { createUserUseCase } from '.';
-import { UserAlreadyExist } from '../../exceptions/users/user-already-exists';
+import { udpateUserUseCase } from '.';
 import { MemoryUserRepository } from '../../repositories/user/memory-user-repository';
 import { createRequestContext } from '../../utils/context/request-context';
+import { createUserUseCase } from '../create-user';
 
-describe('Create User Tests', () => {
+describe('Update User Tests', () => {
 
     beforeEach(() => {
         createRequestContext({});
@@ -13,22 +13,14 @@ describe('Create User Tests', () => {
             .deleteAll();
     });
 
-    it('should create a user with success', async () => {
-        const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthday: '1991-08-28' }
-        const user = await createUserUseCase.execute(payload);
-        expect(user).have.property('id');
-        expect(user.name).to.be.eq(payload.name);
-        expect(user.email).to.be.eq(payload.email);
-        expect(user.birthday).to.be.eq(payload.birthday);
-    });
-
-    it('should not create a user because he already exists', async () => {
-        try {
-            const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthday: '1991-08-28' }
-            await createUserUseCase.execute(payload);
-            await createUserUseCase.execute(payload);
-        } catch(err) {
-            expect(err).to.be.an.instanceof(UserAlreadyExist);
-        }
+    it('should update a user with success', async () => {
+        const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthday: '1992-07-28' }
+        const createdUser = await createUserUseCase.execute(payload);
+        const update = { id: createdUser.id, birthday: '1991-08-28' }
+        const updatedUser = await udpateUserUseCase.execute(update);
+        expect(updatedUser).have.property('id');
+        expect(updatedUser.name).to.be.eq(createdUser.name);
+        expect(updatedUser.email).to.be.eq(createdUser.email);
+        expect(updatedUser.birthday).to.be.not.eq(createdUser.birthday);
     });
 })

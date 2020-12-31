@@ -4,7 +4,7 @@ import { MemoryUserRepository } from '../../repositories/user/memory-user-reposi
 import { createUserUseCase } from '../create-user';
 import { createRequestContext } from '../../utils/context/request-context';
 
-describe('Create User Tests', () => {
+describe('List Users Tests', () => {
 
     beforeEach(() => {
         createRequestContext({});

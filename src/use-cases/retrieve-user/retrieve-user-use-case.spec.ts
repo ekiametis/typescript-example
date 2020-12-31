@@ -5,7 +5,7 @@ import { createUserUseCase } from '../create-user';
 import { UserNotFound } from '../../exceptions/users/user-not-found';
 import { createRequestContext } from '../../utils/context/request-context';
 
-describe('Create User Tests', () => {
+describe('Retrieve User Tests', () => {
 
     beforeEach(() => {
         createRequestContext({});

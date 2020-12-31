@@ -30,7 +30,7 @@ export class UpdateUserController {
         const data = { id, name, email, birthday }
         try {
             const response = await this.service.execute(data);
-            return res.status(HttpStatusCode.CREATED).json(response);
+            return res.status(HttpStatusCode.SUCCESS).json(response);
         } catch(err) {
             loggerError.error(`[update-user-controller][handle][CorrelationId] - ${context.correlationId} - ${err}`);
             let formattedError = err;

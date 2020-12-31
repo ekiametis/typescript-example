@@ -76,7 +76,7 @@ export class MemoryUserRepository implements IUserRepository {
 
     deleteById(id: string): Promise<User> {
         return new Promise((resolve) => {
-            const user: User = this.users.find(u => u.id === id);
+            const user = this.users.find(u => u.id === id);
             this.users = this.users.splice(this.users.indexOf(user));
             resolve(user);
         })
@@ -93,9 +93,10 @@ export class MemoryUserRepository implements IUserRepository {
     updateById(id: string, update: Partial<User>): Promise<User> {
         return new Promise((resolve) => {
             const userFound = this.users.find(u => u.id === id);
+            const newUser = { ...userFound, ...update }
             this.users = this.users.splice(this.users.indexOf(userFound));
-            Object.assign(userFound, update);
-            resolve(userFound);
+            this.users.push(newUser);
+            resolve(newUser);
         })
     }
 }
