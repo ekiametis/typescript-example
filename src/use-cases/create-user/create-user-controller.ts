@@ -9,6 +9,7 @@ import { getLoggerStore } from "../../config";
 import { ILogger } from "../../components/logger/logger";
 
 const logger: ILogger = getLoggerStore('system');
+const loggerError: ILogger = getLoggerStore('systemError');
 
 export class CreateUserController {
 
@@ -22,13 +23,13 @@ export class CreateUserController {
 
     async handle (req: Request, res: Response, next: NextFunction): Promise<Response> {
         const context: IContext = getRequestContext();
-        logger.info(`[CorrelationId] - ${context.correlationId}`);
+        logger.info(`[create-user-controller][handle][CorrelationId] - ${context.correlationId}`);
         const { name, email, birthday } = req.body;
         try {
             const response = await this.service.execute({ name, email, birthday });
             return res.status(HttpStatusCode.CREATED).json(response);
         } catch(err) {
-            logger.error(`[CorrelationId] - ${context.correlationId} - ${err}`);
+            loggerError.error(`[create-user-controller][handle][CorrelationId] - ${context.correlationId} - ${err}`);
             let formattedError = err;
             if(err instanceof UserAlreadyExist) {
                 formattedError = HttpException.build(HttpStatusCode.CONFLICT, 1000, err.message);
