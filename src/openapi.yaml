@@ -221,6 +221,10 @@ components:
           format: date
           description: User birthdate
     IUpdateUserRequestDTO:
+      required:
+        - name
+        - email
+        - birthdate
       properties:
         name:
           type: string
