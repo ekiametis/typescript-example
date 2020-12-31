@@ -12,7 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(openApiValidatorMiddleware(path.join(__dirname, `openapi/openapi-${CURRENT_VERSION}.yaml`)))
 app.use(requestContextMiddleware);
-app.use(router);
+app.use(`/${CURRENT_VERSION}`, router);
 app.use(errorHandlingMiddleware);
 
 export { app }

@@ -4,7 +4,7 @@ info:
   version: v2
   title: Swagger made by Emmanuel Kiametis
 servers:
-  - url: http://localhost:3333
+  - url: http://localhost:3333/v2
   
 tags: 
   - name: Users
