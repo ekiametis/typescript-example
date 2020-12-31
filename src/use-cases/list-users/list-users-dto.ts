@@ -5,7 +5,7 @@ export interface IListUserRequestDTO {
     birthdate?: string,
 }
 
-interface UserDTO {
+interface IUserResponseDTO {
     id: string,
     name: string;
     email: string;
@@ -13,22 +13,22 @@ interface UserDTO {
 }
 
 export interface IListUserResponseDTO {
-    list: UserDTO[];
+    list: IUserResponseDTO[];
 }
 
 export class ListUserResponseDTO {
 
-    private constructor(private users: UserDTO[] = []) {}
+    private constructor(private users: IUserResponseDTO[] = []) {}
 
-    static build(users: UserDTO[]): ListUserResponseDTO {
+    static build(users: IUserResponseDTO[]): ListUserResponseDTO {
         return new ListUserResponseDTO(users);
     }
 
-    push(user: UserDTO) {
+    push(user: IUserResponseDTO) {
         this.users.push(user);
     }
 
-    pushAll(users: UserDTO[]) {
+    pushAll(users: IUserResponseDTO[]) {
         this.users =  this.users.concat(users);
     }
 
