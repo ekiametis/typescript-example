@@ -27,7 +27,7 @@ paths:
               $ref: '#/components/schemas/ICreateUserRequestDTO'
       responses:
         201:
-          description: List of users
+          description: User registered
           content:
             application/json:
               schema:
@@ -73,7 +73,7 @@ paths:
             description: User birthdate
       responses:
         200:
-          description: List of users
+          description: An user
           content:
             application/json:
               schema:
@@ -84,8 +84,174 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/IHttpException'
+  /users/{id}:
+    put:
+      tags:
+        - Users
+      summary: Update an user
+      description: Update an user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: 
+            type: string
+            description: User identifier
+      requestBody:
+        description: User data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IUpdateUserRequestDTO'
+      responses:
+        201:
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IUpdateUserResponseDTO'
+        404:
+          description: User does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
+        500:
+          description: Internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
+    patch:
+      tags:
+        - Users
+      summary: Update the user's birthdate
+      description: Update the user's birthdate
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: 
+            type: string
+            description: User identifier
+      requestBody:
+        description: User data
+        required: true
+        content:
+          application/json:
+            schema:
+              required:
+              - birthdate
+              properties:
+                birthdate:
+                  type: string
+                  format: date
+                  description: User birthdate
+      responses:
+        201:
+          description: Updated user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IUpdateUserResponseDTO'
+        404:
+          description: User does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
+        500:
+          description: Internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
+    get:
+      tags:
+        - Users
+      summary: Retrieve an user by identifier
+      description: Retrieve an user by identifier
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema: 
+            type: string
+            description: User identifier
+      responses:
+        200:
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IRetrieveUserResponseDTO'
+        404:
+          description: User does not exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
+        500:
+          description: Internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
 components:
   schemas:
+    IRetrieveUserResponseDTO:
+      required:
+      - id
+      - name
+      - email
+      - birthdate
+      properties:
+        id:
+          type: string
+          description: User identifier
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+        birthdate:
+          type: string
+          format: date
+          description: User birthdate
+    IUpdateUserRequestDTO:
+      properties:
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+        birthdate:
+          type: string
+          format: date
+          description: User birthdate
+    IUpdateUserResponseDTO:
+      required:
+      - id
+      - name
+      - email
+      - birthdate
+      properties:
+        id:
+          type: string
+          description: User identifier
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+        birthdate:
+          type: string
+          format: date
+          description: User birthdate
     ICreateUserRequestDTO:
       required:
       - name
