@@ -42,6 +42,36 @@ export class MemoryUserRepository implements IUserRepository {
         })
     }
 
+    find(query: Partial<User>): Promise<User[]> {
+        return new Promise((resolve) => {
+            let result = this.users;
+            result = result.filter(u => {
+                return (
+                    query.id === u.id ||
+                    query.name === u.name ||
+                    query.email === u.email ||
+                    query.birthday === u.birthday
+                );
+            });
+            resolve(result);
+        });
+    }
+
+    findOne(query: Partial<User>): Promise<User> {
+        return new Promise((resolve) => {
+            let result = this.users;
+            result = result.filter(u => {
+                return (
+                    query.id === u.id ||
+                    query.name === u.name ||
+                    query.email === u.email ||
+                    query.birthday === u.birthday
+                );
+            });
+            resolve(result[0]);
+        });
+    }
+
     deleteById(id: string): Promise<User> {
         return new Promise((resolve) => {
             const user: User = this.users.find(u => u.id === id);

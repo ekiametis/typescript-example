@@ -19,7 +19,7 @@ export class ListUsersUseCase {
     async execute(data: IListUserRequestDTO): Promise<IListUserResponseDTO> {
         const context: IContext = getRequestContext();
         logger.info(`[list-users-use-case][handle][CorrelationId] - ${context.correlationId}`);
-        const users = await this.userRepository.findAll();
+        const users = await this.userRepository.find(data);
         const response = ListUserResponseDTO.build(users);
         return response.listAll();
     }
