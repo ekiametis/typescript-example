@@ -89,4 +89,13 @@ export class MemoryUserRepository implements IUserRepository {
             resolve(sizeDeleted);
         })
     }
+
+    updateById(id: string, update: Partial<User>): Promise<User> {
+        return new Promise((resolve) => {
+            const userFound = this.users.find(u => u.id === id);
+            this.users = this.users.splice(this.users.indexOf(userFound));
+            Object.assign(userFound, update);
+            resolve(userFound);
+        })
+    }
 }

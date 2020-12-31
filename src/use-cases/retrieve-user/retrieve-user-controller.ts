@@ -32,7 +32,7 @@ export class RetrieveUserController {
             loggerError.error(`[retrieve-user-controller][handle][CorrelationId] - ${context.correlationId} - ${err}`);
             let formattedError = err;
             if(err instanceof UserNotFound) {
-                formattedError = HttpException.build(HttpStatusCode.NOT_FOUND, 1000, err.message);
+                formattedError = HttpException.build(HttpStatusCode.NOT_FOUND, 3000, err.message);
             }
             next(formattedError);
         }
