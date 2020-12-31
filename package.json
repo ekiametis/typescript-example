@@ -4,11 +4,12 @@
   "description": "It's a project I would like to show you the typescript code and my way to organize the project using DDD + SOLID + Package-by-feature + Clean Code + REST (Best practices)",
   "main": "index.js",
   "scripts": {
-    "build": "./node_modules/typescript/bin/tsc",
+    "build": "npm run clean-dist && npm run build-ts && npm run copy-openapi-folder",
+    "build-ts": "./node_modules/typescript/bin/tsc",
     "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" npm run test",
     "clean-dist": "rm -rf ./dist",
     "copy-openapi-folder": "cp -R src/openapi dist/openapi",
-    "prestart": "npm run clean-dist && npm run build && npm run copy-openapi-folder",
+    "prestart": "npm run build",
     "start": "CURRENT_VERSION=v2 node dist/server.js",
     "start-ts": "CURRENT_VERSION=v2 ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/server.ts",
     "test": "mocha -r ts-node/register src/**/*.spec.ts"
