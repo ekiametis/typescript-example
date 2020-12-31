@@ -42,4 +42,19 @@ export class MemoryUserRepository implements IUserRepository {
         })
     }
 
+    deleteById(id: string): Promise<User> {
+        return new Promise((resolve) => {
+            const user: User = this.users.find(u => u.id === id);
+            this.users = this.users.splice(this.users.indexOf(user));
+            resolve(user);
+        })
+    }
+
+    deleteAll(): Promise<Number> {
+        return new Promise((resolve) => {
+            const sizeDeleted = this.users.length;
+            this.users = [];
+            resolve(sizeDeleted);
+        })
+    }
 }

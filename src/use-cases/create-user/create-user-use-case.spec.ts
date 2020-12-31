@@ -1,8 +1,15 @@
 import { expect } from 'chai';
 import { createUserUseCase } from '.';
 import { UserAlreadyExist } from '../../exceptions/users/user-already-exists';
+import { MemoryUserRepository } from '../../repositories/user/memory-user-repository';
 
 describe('Create User Tests', () => {
+
+    beforeEach(() => {
+        MemoryUserRepository
+            .build()
+            .deleteAll();
+    });
 
     it('should create a user with success', async () => {
         const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthday: '1991-08-28' }

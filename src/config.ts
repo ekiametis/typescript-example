@@ -4,18 +4,19 @@ import { ILogger } from "./components/logger/logger";
 
 let loggerStore: LoggerStore;
 
-export const setup = (): void => {
+const setup = (): void => {
     loggerStore = Log4JSLoggerConfigurator
-                    .build()
-                    .setup()
-                    .getLoggerStore();
+    .build()
+    .setup()
+    .getLoggerStore();
 }
+
+setup();
 
 export const getLoggerStore = (categoryName: string): ILogger => {
     return loggerStore.getLogger(categoryName);
 }
 
 export default {
-    setup,
     getLoggerStore,
 }

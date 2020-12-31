@@ -1,7 +1,5 @@
 import express from 'express';
-import Config from './config';
-Config.setup();
-
+import './config';
 import { router } from './routes/user/user-route';
 import { errorHandlingMiddleware } from './middlewares/error-handling-middleware';
 import { requestContextMiddleware } from './middlewares/request-context-middleware';
