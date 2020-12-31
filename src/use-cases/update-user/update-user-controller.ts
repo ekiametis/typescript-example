@@ -26,8 +26,8 @@ export class UpdateUserController {
         const context: IContext = getRequestContext();
         logger.info(`[update-user-controller][handle][CorrelationId] - ${context.correlationId}`);
         const { id } = req.params;
-        const { name, email, birthday } = req.body;
-        const data = { id, name, email, birthday }
+        const { name, email, birthdate } = req.body;
+        const data = { id, name, email, birthdate }
         try {
             const response = await this.service.execute(data);
             return res.status(HttpStatusCode.SUCCESS).json(response);

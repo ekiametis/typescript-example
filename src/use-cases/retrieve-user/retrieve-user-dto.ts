@@ -6,7 +6,7 @@ interface UserDTO {
     id: string,
     name: string;
     email: string;
-    birthday: string;
+    birthdate: string;
 }
 
 export interface IRetrieveUserResponseDTO extends UserDTO {}

@@ -14,17 +14,17 @@ describe('Create User Tests', () => {
     });
 
     it('should create a user with success', async () => {
-        const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthday: '1991-08-28' }
+        const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthdate: '1991-08-28' }
         const user = await createUserUseCase.execute(payload);
         expect(user).have.property('id');
         expect(user.name).to.be.eq(payload.name);
         expect(user.email).to.be.eq(payload.email);
-        expect(user.birthday).to.be.eq(payload.birthday);
+        expect(user.birthdate).to.be.eq(payload.birthdate);
     });
 
     it('should not create a user because he already exists', async () => {
         try {
-            const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthday: '1991-08-28' }
+            const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthdate: '1991-08-28' }
             await createUserUseCase.execute(payload);
             await createUserUseCase.execute(payload);
         } catch(err) {

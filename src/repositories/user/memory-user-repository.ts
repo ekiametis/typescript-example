@@ -51,7 +51,7 @@ export class MemoryUserRepository implements IUserRepository {
                     query.id === u.id ||
                     query.name === u.name ||
                     query.email === u.email ||
-                    query.birthday === u.birthday
+                    query.birthdate === u.birthdate
                 );
             });
             resolve(result);
@@ -67,7 +67,7 @@ export class MemoryUserRepository implements IUserRepository {
                     query.id === u.id ||
                     query.name === u.name ||
                     query.email === u.email ||
-                    query.birthday === u.birthday
+                    query.birthdate === u.birthdate
                 );
             });
             resolve(result[0]);

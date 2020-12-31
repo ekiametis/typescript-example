@@ -24,9 +24,9 @@ export class CreateUserController {
     async handle (req: Request, res: Response, next: NextFunction): Promise<Response> {
         const context: IContext = getRequestContext();
         logger.info(`[create-user-controller][handle][CorrelationId] - ${context.correlationId}`);
-        const { name, email, birthday } = req.body;
+        const { name, email, birthdate } = req.body;
         try {
-            const response = await this.service.execute({ name, email, birthday });
+            const response = await this.service.execute({ name, email, birthdate });
             return res.status(HttpStatusCode.CREATED).json(response);
         } catch(err) {
             loggerError.error(`[create-user-controller][handle][CorrelationId] - ${context.correlationId} - ${err}`);

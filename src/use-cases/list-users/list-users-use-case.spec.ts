@@ -22,7 +22,7 @@ describe('List Users Tests', () => {
     });
 
     it('should list a user with success', async () => {
-        const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthday: '1991-08-28' }
+        const payload = { name: 'Emmanuel Kiametis', email: 'kiametis91@gmail.com', birthdate: '1991-08-28' }
         await createUserUseCase.execute(payload);
         const queryParams = {}
         const response = await listUsersUseCase.execute(queryParams);
