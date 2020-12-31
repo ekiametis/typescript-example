@@ -1,0 +1,107 @@
+openapi: "3.0.0"
+
+info:
+  version: v1
+  title: Swagger made by Emmanuel Kiametis
+servers:
+  - url: http://localhost:3333
+  
+tags: 
+  - name: Users
+    description: Resources to manage users
+
+
+paths:
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Retrieve a list of users
+      description: Retrieve a list of users allowing to pass query parameters to filter the result
+      parameters:
+        - in: query
+          name: id
+          schema: 
+            type: string
+            description: User identifier
+        - in: query
+          name: name
+          schema: 
+            type: string
+            description: User name
+        - in: query
+          name: email
+          schema: 
+            type: string
+            description: User email
+        - in: query
+          name: birthdate
+          schema: 
+            type: string
+            format: date
+            description: User birthdate
+      responses:
+        200:
+          description: An user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IListUserResponseDTO'
+        500:
+          description: Internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
+components:
+  schemas:
+    IUserResponseDTO:
+      required:
+      - id
+      - name
+      - email
+      - birthdate
+      properties:
+        id:
+          type: string
+          description: User identifier
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+        birthdate:
+          type: string
+          format: date
+          description: User birthdate
+    IListUserResponseDTO:
+      required:
+      - list
+      properties:
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/IUserResponseDTO'
+    IHttpException:
+      required:
+      - httpStatusCode
+      - errorCode
+      - errorMessage
+      type: object
+      properties:
+        httpStatusCode:
+          type: number
+          description: Http status code
+        errorCode:
+          type: number
+          description: Error code
+        errorMessage:
+          type: string
+          description: Error message
+        detailCode:
+          type: number
+          description: Detail error code
+        detailMessage:
+          type: string
+          description: Detail message

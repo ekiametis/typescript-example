@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "./node_modules/typescript/bin/tsc",
-    "start": "node dist/server.js",
-    "start-ts": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/server.ts",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" npm run test"
+    "coverage": "nyc -r lcov -e .ts -x \"*.spec.ts\" npm run test",
+    "clean-dist": "rm -rf ./dist",
+    "copy-openapi-folder": "cp -R src/openapi dist/openapi",
+    "prestart": "npm run clean-dist && npm run build && npm run copy-openapi-folder",
+    "start": "CURRENT_VERSION=v2 node dist/server.js",
+    "start-ts": "CURRENT_VERSION=v2 ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
   "author": "Emmanuel Kiametis",
   "license": "ISC",

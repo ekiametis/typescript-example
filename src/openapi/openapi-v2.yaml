@@ -1,7 +1,7 @@
 openapi: "3.0.0"
 
 info:
-  version: v1
+  version: v2
   title: Swagger made by Emmanuel Kiametis
 servers:
   - url: http://localhost:3333
