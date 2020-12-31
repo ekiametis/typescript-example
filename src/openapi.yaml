@@ -13,6 +13,37 @@ tags:
 
 paths:
   /users:
+    post:
+      tags:
+        - Users
+      summary: Register an user
+      description: Register an user
+      requestBody:
+        description: User data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ICreateUserRequestDTO'
+      responses:
+        201:
+          description: List of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ICreateUserResponseDTO'
+        409:
+          description: User already exist.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
+        500:
+          description: Internal error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IHttpException'
     get:
       tags:
         - Users
@@ -55,6 +86,42 @@ paths:
                 $ref: '#/components/schemas/IHttpException'
 components:
   schemas:
+    ICreateUserRequestDTO:
+      required:
+      - name
+      - email
+      - birthdate
+      properties:
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+        birthdate:
+          type: string
+          format: date
+          description: User birthdate
+    ICreateUserResponseDTO:
+      required:
+      - id
+      - name
+      - email
+      - birthdate
+      properties:
+        id:
+          type: string
+          description: User identifier
+        name:
+          type: string
+          description: User name
+        email:
+          type: string
+          description: User email
+        birthdate:
+          type: string
+          format: date
+          description: User birthdate
     IUserResponseDTO:
       required:
       - id
