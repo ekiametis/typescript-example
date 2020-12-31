@@ -2,10 +2,12 @@ import { expect } from 'chai';
 import { listUsersUseCase } from '.';
 import { MemoryUserRepository } from '../../repositories/user/memory-user-repository';
 import { createUserUseCase } from '../create-user';
+import { createRequestContext } from '../../utils/context/request-context';
 
 describe('Create User Tests', () => {
 
     beforeEach(() => {
+        createRequestContext({});
         MemoryUserRepository
             .build()
             .deleteAll();

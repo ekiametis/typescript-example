@@ -3,10 +3,12 @@ import { retrieveUserUseCase } from '.';
 import { MemoryUserRepository } from '../../repositories/user/memory-user-repository';
 import { createUserUseCase } from '../create-user';
 import { UserNotFound } from '../../exceptions/users/user-not-found';
+import { createRequestContext } from '../../utils/context/request-context';
 
 describe('Create User Tests', () => {
 
     beforeEach(() => {
+        createRequestContext({});
         MemoryUserRepository
             .build()
             .deleteAll();

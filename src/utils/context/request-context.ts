@@ -5,13 +5,13 @@ const store = new Map<Number, IContext>();
 
 const hook: HookCallbacks = {
     init: (asyncId, type, triggerAsyncId, resource) => {
-        if (store.has(Number(triggerAsyncId))) {
-            store.set(Number(asyncId), store.get(triggerAsyncId))
+        if (store.has(triggerAsyncId)) {
+            store.set(asyncId, store.get(triggerAsyncId))
         }
     },
     destroy: (asyncId) => {
-        if (store.has(Number(asyncId))) {
-            store.delete(Number(asyncId));
+        if (store.has(asyncId)) {
+            store.delete(asyncId);
         }
     }
 }
@@ -21,12 +21,12 @@ asyncHook.enable();
 
 export const createRequestContext = (data, correlationId = uuid()): IContext => {
     const requestInfo: IContext = { correlationId, data };
-    store.set(Number(asyncHooks.executionAsyncId()), requestInfo);
+    store.set(asyncHooks.executionAsyncId(), requestInfo);
     return requestInfo;
 };
 
 export const getRequestContext = (): IContext => {
-    return store.get(Number(asyncHooks.executionAsyncId()));
+    return store.get(asyncHooks.executionAsyncId());
 };
 
 export default { createRequestContext, getRequestContext };
