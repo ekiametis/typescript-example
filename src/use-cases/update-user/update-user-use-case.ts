@@ -5,11 +5,12 @@ import { ILogger } from "../../components/logger/logger";
 import { IContext } from "../../components/context/context";
 import { getRequestContext } from "../../utils/context/request-context";
 import { UserNotFound } from "../../exceptions/users/user-not-found";
+import { IUseCaseService } from "../../components/service/use-case-service";
 
 const logger: ILogger = getLoggerStore('system');
 const loggerError: ILogger = getLoggerStore('systemError');
 
-export class UpdateUserUseCase {
+export class UpdateUserUseCase implements IUseCaseService<IUpdateUserRequestDTO, IUpdateUserResponseDTO> {
 
     private constructor(private userRepository: IUserRepository) {}
 

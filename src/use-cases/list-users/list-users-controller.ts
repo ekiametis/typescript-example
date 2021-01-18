@@ -5,11 +5,12 @@ import { ILogger } from "../../components/logger/logger";
 import { getLoggerStore } from "../../config";
 import { getRequestContext } from "../../utils/context/request-context";
 import { IContext } from "../../components/context/context";
+import { IUseCaseController } from "../../components/controller/controller";
 
 const logger: ILogger = getLoggerStore('system');
 const loggerError: ILogger = getLoggerStore('systemError');
 
-export class ListUsersController {
+export class ListUsersController implements IUseCaseController {
 
     private constructor (private service: ListUsersUseCase) {
         this.handle = this.handle.bind(this);

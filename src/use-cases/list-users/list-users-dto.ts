@@ -1,22 +1,24 @@
-export interface IListUserRequestDTO {
+import { IDTO } from "../../components/dto/dto";
+
+export interface IListUserRequestDTO extends IDTO {
     id?: string,
     name?: string,
     email?: string,
     birthdate?: string,
 }
 
-interface IUserResponseDTO {
+interface IUserResponseDTO extends IDTO {
     id: string,
     name: string;
     email: string;
     birthdate: string;
 }
 
-export interface IListUserResponseDTO {
+export interface IListUserResponseDTO extends IDTO {
     list: IUserResponseDTO[];
 }
 
-export class ListUserResponseDTO {
+export class ListUserResponseDTO implements IDTO {
 
     private constructor(private users: IUserResponseDTO[] = []) {}
 

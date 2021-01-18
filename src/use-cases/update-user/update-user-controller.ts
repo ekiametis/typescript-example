@@ -8,11 +8,12 @@ import { IContext } from "../../components/context/context";
 import { getLoggerStore } from "../../config";
 import { ILogger } from "../../components/logger/logger";
 import { UserNotFound } from "../../exceptions/users/user-not-found";
+import { IUseCaseController } from "../../components/controller/controller";
 
 const logger: ILogger = getLoggerStore('system');
 const loggerError: ILogger = getLoggerStore('systemError');
 
-export class UpdateUserController {
+export class UpdateUserController implements IUseCaseController {
 
     private constructor (private service: UpdateUserUseCase) {
         this.handle = this.handle.bind(this);

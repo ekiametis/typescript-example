@@ -1,8 +1,10 @@
-export interface IRetrieveUserRequestDTO {
+import { IDTO } from "../../components/dto/dto";
+
+export interface IRetrieveUserRequestDTO extends IDTO {
     id: string
 }
 
-interface UserDTO {
+interface UserDTO extends IDTO{
     id: string,
     name: string;
     email: string;

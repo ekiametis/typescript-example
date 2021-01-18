@@ -4,11 +4,12 @@ import { getLoggerStore } from "../../config";
 import { ILogger } from "../../components/logger/logger";
 import { IContext } from "../../components/context/context";
 import { getRequestContext } from "../../utils/context/request-context";
+import { IUseCaseService } from "../../components/service/use-case-service";
 
 const logger: ILogger = getLoggerStore('system');
 const loggerError: ILogger = getLoggerStore('systemError');
 
-export class ListUsersUseCase {
+export class ListUsersUseCase implements IUseCaseService<IListUserRequestDTO, IListUserResponseDTO> {
 
     private constructor(private userRepository: IUserRepository) {}
 

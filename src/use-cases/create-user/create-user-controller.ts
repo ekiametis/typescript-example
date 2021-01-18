@@ -7,11 +7,12 @@ import { getRequestContext } from "../../utils/context/request-context";
 import { IContext } from "../../components/context/context";
 import { getLoggerStore } from "../../config";
 import { ILogger } from "../../components/logger/logger";
+import { IUseCaseController } from "../../components/controller/controller";
 
 const logger: ILogger = getLoggerStore('system');
 const loggerError: ILogger = getLoggerStore('systemError');
 
-export class CreateUserController {
+export class CreateUserController implements IUseCaseController {
 
     private constructor (private service: CreateUserUseCase) {
         this.handle = this.handle.bind(this);
